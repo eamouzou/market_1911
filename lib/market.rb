@@ -39,4 +39,28 @@ class Market
     end
   end
 
+  def sell(item, amount)
+    if total_inventory[item] < amount
+      false
+    else
+      amount_counter = amount
+      @vendors.each do |vendor|
+        vendor.inventory.each do |itemandamount|
+          vendoritem = itemandamount[0]
+          vendoramount = itemandamount[1]
+          if vendoritem == item && amount_counter != 0
+            if amount_counter > vendoramount
+              vendor.sell_item(item, vendoramount)
+              amount_counter -= vendoramount
+            elsif amount_counter <= vendoramount
+              vendor.sell_item(item, amount_counter)
+              amount_counter -= vendoramount
+            end
+          end
+        end
+      end
+      true
+    end
+  end
+
 end
