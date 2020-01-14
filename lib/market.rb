@@ -21,4 +21,13 @@ class Market
     end
   end
 
+  def sorted_item_list
+    @vendors.reduce([]) do |acc, vendor|
+      vendor.inventory.keys.each do |item|
+        acc << item.name
+      end
+      acc
+    end.uniq.sort
+  end
+
 end
