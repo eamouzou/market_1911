@@ -14,4 +14,6 @@ class VendorTest < Minitest::Test
   def test_it_exists
     assert_instance_of Vendor, @vendor
   end
+
+  
 end
