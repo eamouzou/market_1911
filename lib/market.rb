@@ -30,4 +30,13 @@ class Market
     end.uniq.sort
   end
 
+  def total_inventory
+    @vendors.reduce(Hash.new(0)) do |acc, vendor|
+      vendor.inventory.each do |item|
+        acc[item[0]] += item[1]
+      end
+      acc
+    end
+  end
+
 end
